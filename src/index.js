@@ -48,6 +48,7 @@ const server = http.createServer((request, response) => {
         response.header = "Content-Type: text/plain"
         response.write("Hello, word!");
         response.end()
+        return;
     }
 
     response.status = 500;
@@ -55,6 +56,7 @@ const server = http.createServer((request, response) => {
     response.header = "Content-Type: text/plain";
     response.write("");
     response.end();
+    return;
 })
 
 server.listen(port, hostname, () => {
