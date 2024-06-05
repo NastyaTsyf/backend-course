@@ -19,44 +19,41 @@ const server = http.createServer((request, response) => {
     const userName = url.searchParams.get('hello');
 
     if (userName) {
-        response.status = 200;
+        response.statusCode = 200;
         response.statusMessage = "OK"
         response.header = "Content-Type: text/plain"
         response.write(`Hello, ${userName}.`);
         response.end();
         return;
-    }
-    if (request.url === '/?hello') {
-        response.status = 400;
+    } else if (request.url === '/?hello') {
+        response.statusCode = 400;
         response.statusMessage = "OK"
         response.header = "Content-Type: text/plain"
         response.write('Enter a name');
         response.end();
         return;
-    }
-    if (request.url === '/?users') {
-        response.status = 200;
+    } else if (request.url === '/?users') {
+        response.statusCode = 200;
         response.statusMessage = "OK"
         response.header = "Content-Type: application/json"
         response.write(getUsers());
         response.end();
         return;
-    }
-    if (request.url === "/") {
-        response.status = 200;
+    } else if (request.url === "/") {
+        response.statusCode = 200;
         response.statusMessage = "OK"
         response.header = "Content-Type: text/plain"
         response.write("Hello, word!");
         response.end()
         return;
+    } else {
+        response.statusCode = 500;
+        response.statusMessage = "ERROR";
+        response.header = "Content-Type: text/plain";
+        response.write("Ошибка");
+        response.end();
+        return;
     }
-
-    response.status = 500;
-    response.statusMessage = "Ok";
-    response.header = "Content-Type: text/plain";
-    response.write("");
-    response.end();
-    return;
 })
 
 server.listen(port, hostname, () => {
