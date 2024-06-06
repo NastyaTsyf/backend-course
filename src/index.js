@@ -49,7 +49,7 @@ const server = http.createServer((request, response) => {
     } else {
         response.statusCode = 500;
         response.statusMessage = "ERROR";
-        response.header = "Content-Type: text/plain";
+        response.header = "Content-Type: text/html; charset=utf-8";
         response.write("Ошибка");
         response.end();
         return;
